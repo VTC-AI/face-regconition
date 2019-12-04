@@ -10,7 +10,7 @@ def test_detect():
 
   image = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
-    "samples/3.jpg"
+    "samples/blackpink/blackpink4.jpg"
   )
 
   print("image path is: " + image)
@@ -25,14 +25,21 @@ def test_detect():
   cv2.namedWindow(window_name, cv2.WND_PROP_AUTOSIZE)
   cv2.startWindowThread()
 
+  for face in faces:
+    # print(face.face_landmark)
+    for (x, y) in face.face_landmark:
+      cv2.circle(test_image, (x, y), 1, (0, 0, 255), -1)
+
   cv2.imshow('image', test_image)
   cv2.waitKey(0)
   cv2.destroyAllWindows()
   cv2.waitKey(1)
   print("done showing face annotated image!")
 
-  for face in faces:
-    print(face.face_landmark)
+  # for face in faces:
+  #   # print(face.face_landmark)
+  #   for (x, y) in face.face_landmark:
+  #     cv2.circle(test_image, (x, y), 1, (0, 0, 255), -1)
 
   print("done")
 
