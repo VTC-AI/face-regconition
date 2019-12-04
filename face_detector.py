@@ -66,12 +66,12 @@ class FaceDetectorDlib(FaceDetector):
       x = max(det.left(), 0)
       y = max(det.top(), 0)
       w = min(det.right() - det.left(), npimg.shape[1] - x)
-      h = min(det.bottom() - det.top(), npimg.shape[0] -y)
+      h = min(det.bottom() - det.top(), npimg.shape[0] - y)
 
       if w <= 1 or h <= 1:
         continue
       
-      bbox = BoundingBox(x, y, w, h, scores)
+      bbox = BoundingBox(x, y, w, h, score)
 
       bbox.face_landmark = self.detect_landmark(npimg, det)
 
@@ -87,6 +87,5 @@ class FaceDetectorDlib(FaceDetector):
 
     for i in range(0, 68):
       coords[i] = (shape.part(i).x, shape.part(i).y)
-
     return coords
 
